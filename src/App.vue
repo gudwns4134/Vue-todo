@@ -37,8 +37,6 @@ export default {
       if(!this.todoItems.some(data => data.item == todoItem)) { // 중복 입력 방지
         this.todoItems.push(obj);
       }
-    
-      
     },
 
     removeOneItem: function (todoItem, index) {
