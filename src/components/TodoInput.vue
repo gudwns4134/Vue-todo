@@ -12,7 +12,7 @@
         <i class="closeModalBtn fas fa-times" @click="showModal = false"></i> <!-- @ <- v-on 축약형이다. -->
       </h3>
       <div slot="body">
-        아무것도 입력하지 않으셨습니다.
+        아무것도 입력하지 않으셨습니다. 
       </div>
     </Modal>
   </div>
