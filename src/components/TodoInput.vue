@@ -17,8 +17,9 @@ export default {
     methods: {
         addTodo: function() {   // 저장만 하는 기능
             if(this.newTodoItem !== '') {
-                var obj = {completed: false, item: this.newTodoItem};   // completed를 list에서 사용하기 위해 이런 식으로 한다.
-                localStorage.setItem(this.newTodoItem, JSON.stringify(obj));    // Object를 String으로 변환해서 저장한다.
+                // this.$emit('이벤트 이름', 인자1, 인자2,)
+                this.$emit('addTodoItem', this.newTodoItem) // addTodoItem 라는 이벤트를 여기(하위)에서 발생 (올려보냄)
+                
                 this.clearInput();
                 // 개발자모드 appliciton에 가면 localStorage 이곳에 key : value로 저장된다.
             }

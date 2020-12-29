@@ -2,7 +2,7 @@
   <div>
       <ul>
         <li v-for="( todoItem, index ) in propsdata" v-bind:key="todoItem.item" class="shadow">
-            <i class="checkBtn fas fa-check" v-bind:class="{checkBtnComplated: todoItem.completed}" v-on:click="toggleComplete(todoItem)"></i>
+            <i class="checkBtn fas fa-check" v-bind:class="{checkBtnComplated: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
             <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
             <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                 <i class="fas fa-trash-alt"></i>
@@ -14,18 +14,13 @@
 
 <script>
 export default { 
-    props:['propsdata'],    // 받아 옴
+    props:['propsdata'],    // App.vue(상위)에서 받아 옴
     methods: {
         removeTodo: function(todoItem, index) {
-            console.log(todoItem, index);
-            localStorage.removeItem(todoItem);
-            this.todoItems.splice(index, 1);    // api 참고
+            this.$emit('removeItem', todoItem, index); // 이벤트 발생해서 올려 보냄
         },
-         toggleComplete: function(todoItem) {   //completed 상태 변경
-            todoItem.completed = !todoItem.completed;
-            // 로컬 스토리지의 데이터를 갱신
-            localStorage.removeItem(todoItem.item); 
-            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+         toggleComplete: function(todoItem, index) {   //completed 상태 변경
+            this.$emit('toggleItem', todoItem, index);
         }
     }
 }
