@@ -2,7 +2,8 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList></TodoList>
+    <!-- <TodoList v-bind:내려보낼 프롭스 속성 이름="현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
+    <TodoList v-bind:propsdata="todoItems"></TodoList>  <!-- props를 이용함 -->
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -14,6 +15,22 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
+  data: function() {  // TodoList.vue에 있던 코드를 들고 옴
+    return {
+      todoItems:[]
+    }
+  },  
+  created: function() { 
+        if(localStorage.length > 0){
+            for(var i = 0; i < localStorage.length; i++){
+                if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){  
+                    // loglevel:webpack-dev-server 같지 않은 것들만 축력
+                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+                }
+            }
+        }
+    },
+
   components: {
     // 컴포넌트 태그명 : 컴포넌트 내용
     'TodoHeader': TodoHeader,
