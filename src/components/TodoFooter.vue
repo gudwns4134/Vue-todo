@@ -26,7 +26,6 @@ export default {
 
 .clearAllBtn {
   color: #e20303;
-  /* 추가 */
   display: block;
 }
 </style>
